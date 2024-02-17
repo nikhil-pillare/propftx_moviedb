@@ -5,6 +5,7 @@ import { signin } from "../redux/auth/action";
 import { useState , } from "react";
 import { useToast } from '@chakra-ui/react'
 import {useNavigate} from 'react-router-dom'
+import NavTemp from "./NavTemp";
 import Nav from "./Nav";
 function SignIn() {
   const [email, setEmail]= useState("")
@@ -55,14 +56,17 @@ function SignIn() {
     }
  } 
  return (
-  
+  <>
+
+  <NavTemp/>
   <Box width={"md"}
   margin={"auto"}
   backgroundColor={"rgba(255, 255, 255, 0.8)"} 
   borderRadius={"8px"}
   p={8}
-  mt={20}>
-    <Nav/>
+  style={{marginTop:"100px", position:"fixed", top: '35%', left: '50%', transform: 'translate(-50%, -50%)'}}
+  >
+    
   <FormControl style={{marginTop:"0px"}}>
     <Heading>Login</Heading>
    <FormLabel>E-mail</FormLabel>
@@ -76,6 +80,8 @@ function SignIn() {
    <Button type="submit" bg={"teal"} margin={"20px"} color={"white"} onClick={handleSubmit} name="submit">Login</Button>
   </FormControl>
 </Box>
+
+</>
 );
    
   }

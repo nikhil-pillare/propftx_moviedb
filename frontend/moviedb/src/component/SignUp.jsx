@@ -5,6 +5,7 @@ import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { signup } from "../redux/auth/action";
+import NavTemp from "./NavTemp";
 function SignUp() {
       const [email, setEmail]= useState("")
       const [username, setUsername]= useState("")
@@ -40,6 +41,9 @@ function SignUp() {
    }
 
    return (
+    <>
+    <NavTemp/>
+   
     <Box
       width={"md"}
       margin={"auto"}
@@ -47,7 +51,7 @@ function SignUp() {
       borderRadius={"8px"}
       p={8}
       mt={20}
-      
+      style={{marginTop:"100px", position:"fixed", top: '35%', left: '50%', transform: 'translate(-50%, -50%)'}}
       
     >
      
@@ -55,13 +59,13 @@ function SignUp() {
       <FormControl>
         <Heading>REGISTER</Heading>
         <FormLabel>Username</FormLabel>
-        <Input id="username" placeholder="Username" />
+        <Input id="username" placeholder="Username" value={username} onChange={(e)=>setUsername(e.target.value)}/>
         <FormLabel>Avatar</FormLabel>
-        <Input id="image" placeholder="Profile Photo URL" />
+        <Input id="image" placeholder="Profile Photo URL" value={avatar} onChange={(e)=>setAvatar(e.target.value)} />
         <FormLabel>E-mail</FormLabel>
-        <Input id="email" placeholder="E-mail" type="email" />
+        <Input id="email" placeholder="E-mail" type="email" value={email} onChange={(e)=>setEmail(e.target.value)} />
         <FormLabel>Password</FormLabel>
-        <Input id="password" placeholder="Password" type="password" />
+        <Input id="password" placeholder="Password" type="password" value={password} onChange={(e)=>setPassword(e.target.value)} />
 
         <Box>
           <p>
@@ -78,7 +82,7 @@ function SignUp() {
         </Button>
       </FormControl>
     </Box>
-    
+    </>
   );
 
   }
