@@ -35,8 +35,8 @@ function SignIn() {
         },1000)
        }else{
          toast({
-            title: 'Login Failed',
-            description: 'Please try again',
+            title: 'Login Failed Try after some time',
+            description: '',
             status: 'error',
             duration: 3000,
             isClosable: true,

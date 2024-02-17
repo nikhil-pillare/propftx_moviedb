@@ -14,9 +14,9 @@ export const signup=({username, email, password, avatar})=>(dispatch)=>{
 
 export const signin=({email, password})=>(dispatch)=>{
     dispatch({type: SIGNINREQUEST})
-    axios.post('https://backendmoviedb.onrender.com/user/login', {email, password,})
+    axios.post('https://backendmoviedb.onrender.com/user/login', {email, password})
     .then((res)=>{
-      dispatch({type: SIGNINSUCCESS, token: res.token})
+      dispatch({type: SIGNINSUCCESS})
       localStorage.setItem("isAuth", JSON.stringify(true))
     })
     .catch((req)=>{

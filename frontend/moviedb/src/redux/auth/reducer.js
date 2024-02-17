@@ -3,8 +3,8 @@ import { SIGNINFAILURE,SIGNUPFAILURE, SIGNINREQUEST, SIGNINSUCCESS, SIGNUPREQUES
 const initialState = {
     isloading: false,
     iserror: false,
-    isAuth:false,
-    token:""
+    isAuth:true,
+    
 }
 
 export const reducer = (state = initialState, { type, payload }) => {
@@ -27,7 +27,7 @@ export const reducer = (state = initialState, { type, payload }) => {
             }
         case SIGNINSUCCESS:
                 return {
-                    ...state, isloading:false, isAuth:true,  token:payload
+                    ...state, isloading:false, isAuth:true
                 }   
         case SIGNINFAILURE:
                     return {
