@@ -8,7 +8,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-    origin: 'https://propftx-moviedb.vercel.app',
+    origin: ['https://propftx-moviedb.vercel.app','http://localhost:3000']
 }))
 
 app.use("/user", userRouter)
