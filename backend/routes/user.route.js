@@ -9,20 +9,18 @@ const userModel = require('../models/user.model')
 const userRouter = express.Router();
 
 userRouter.post("/signup", async(req,res)=>{
-    const {email, password, confirmPassword}= req.body;
+    const {email, password,username, avatar}= req.body;
 
     try {
         const user = await userModel.findOne({email});
-        if(password!==confirmPassword){
-            res.status(200).json("both password should be same")
-        }else if(user){
+        if(user){
             res.status(200).json({err:"user alreasy registered!!"})
         }else{
             bcrypt.hash(password, 6, async(err,hash)=>{
                 if(err){
                     res.status(400).json({err:err.message})
                 }else{
-                    const user=new userModel({email, password:hash, confirmPassword:hash})
+                    const user=new userModel({email, password:hash,username, avatar})
 
                     await user.save();
                     res.status(200).json({msg:"user registered"})

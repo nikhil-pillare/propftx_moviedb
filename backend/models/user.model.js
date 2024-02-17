@@ -3,7 +3,8 @@ const mongoose = require("mongoose")
 const UserShchema = new mongoose.Schema({
     email: String,
     password:String,
-    confirmPassword:String
+    username:String,
+    avatar:String
 },
 {
     versionKey: false
