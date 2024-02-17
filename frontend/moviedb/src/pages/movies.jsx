@@ -160,17 +160,20 @@ function Movies() {
               </div>
 
 
-
+              <Flex justifyContent={"space-around"}>
               <Button
                 colorScheme="teal"
                 mt={4}
+                width={"40%"}
                 onClick={() => addToWishlist(item)}
               >
                 Add to Wishlist
               </Button>
-              <Text mt={2} color={lastAddedMovie === item ? 'green' : 'orange'}>
+              <Text width={"60%"} mt={2}  color={lastAddedMovie === item ? 'green' : 'orange'}>
                 {lastAddedMovie === item && lastAddedMovie !== null ? `Added "${item.title}" to Wishlist` : ''}
               </Text>
+              </Flex>
+             
             </Box>
           </Card>
         ))}

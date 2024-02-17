@@ -18,7 +18,8 @@ function Nav() {
             
             {initialAuth?
             <Button>
-                SIGNOUT
+                 
+                <Link to="/" >SIGNOUT</Link>.
             </Button>:
         <Button>
         <Link to={"/"}>REGISTER</Link>
