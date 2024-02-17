@@ -1,8 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Box, Heading, Card, Image, Stack, Text, Input, Flex, Button, Divider } from '@chakra-ui/react';
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+} from '@chakra-ui/react'
+import { useDisclosure } from '@chakra-ui/react';
 import { FaStar } from 'react-icons/fa';
-
+import Nav from '../component/Nav';
 function Movies() {
   const [movies, setMovies] = useState([]);
   const [shows, setShows] = useState([]);
@@ -22,7 +32,7 @@ function Movies() {
   useEffect(() => {
     localStorage.setItem('wishlist', JSON.stringify(wishlist));
   }, [wishlist]);
-  
+
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -70,13 +80,13 @@ function Movies() {
   const toggleWishlist = () => {
     setShowWishlist(!showWishlist);
   };
+  const { isOpen, onOpen, onClose } = useDisclosure()
   return (
-    <Box>
-      <Heading style={{ margin: "auto", color: "white", textAlign: "center", fontFamily: "monospace" }}>
-        {currentCategory === 'Movies' ? 'MovieDB' : 'ShowDB'}
-      </Heading>
-      <Input style={{ width: "60%", backgroundColor: "ButtonFace", marginLeft: "20%" }} value={searchTerm} onChange={handleSearch} placeholder='search your movie...' />
-      <Flex justify="center" mt={4}>
+    <Box >
+      <Nav />
+
+      <Input style={{ width: "60%", backgroundColor: "ButtonFace", marginLeft: "20%", marginTop: "70px" }} value={searchTerm} onChange={handleSearch} placeholder='search your movie...' />
+      <Flex width={"100%"} justifyContent={"space-around"} alignContent={"center"} mt={4}>
         <Button
           colorScheme={currentCategory === 'Movies' ? 'teal' : 'gray'}
           onClick={() => setCurrentCategory('Movies')}
@@ -90,30 +100,34 @@ function Movies() {
         >
           Shows
         </Button>
+
+        <Flex direction='column' align='center'>
+          <Button onClick={toggleWishlist}>
+            {showWishlist ? 'Hide Wishlist' : 'Show Wishlist'}
+          </Button>
+          {showWishlist && (
+            <Box mt={4} bg="rgba(255, 255, 255, 0.8)" p={"10px"} rounded="md">
+              <Heading as="h2" size="md" color="black">
+                Wishlist:
+              </Heading>
+              <ul>
+                {wishlist.map((itemId) => (
+                  <li key={itemId}>{itemId}</li>
+                ))}
+              </ul>
+            </Box>
+          )}
+        </Flex>
       </Flex>
-      <Flex direction='column' align='center' marginTop={"30px"}>
-        <Button onClick={toggleWishlist}>
-          {showWishlist ? 'Hide Wishlist' : 'Show Wishlist'}
-        </Button>
-        {showWishlist && (
-          <Box mt={4} bg="rgba(255, 255, 255, 0.8)" p={"10px"} rounded="md">
-            <Heading as="h2" size="md" color="black">
-              Wishlist:
-            </Heading>
-            <ul>
-              {wishlist.map((itemId) => (
-                <li key={itemId}>{itemId}</li>
-              ))}
-            </ul>
-          </Box>
-        )}
-      </Flex>
+
       <Stack spacing={4} direction="row" flexWrap="wrap" justify="space-around" mt={8}>
         {filteredItems.map((item) => (
-          <Card key={item.id} maxW='sm'  boxShadow="md" rounded="md">
+          <Card key={item.id} width={"30vw"} maxW='sm' height={"70vh"} boxShadow="md" rounded="md">
             <Image
               src={item.poster}
               alt={item.title}
+              height={"50%"}
+              aspectRatio={"3:5"}
               roundedTop="md"
               onError={(e) => {
                 e.target.src = 'https://m.media-amazon.com/images/I/61CHaKs2i1L._AC_UF1000,1000_QL80_.jpg';
@@ -134,9 +148,19 @@ function Movies() {
                 Genre: {item.genre}
               </Text>
               <Divider my={2} />
-              <Text fontSize="sm">
-                {item.plot}
-              </Text>
+
+
+
+               
+              <div style={{height:"50px", overflowY: 'auto',}}>
+                <p>
+                 <span style={{fontWeight:"bolder"}}>Movie plot:</span> {item.plot}
+                </p>
+
+              </div>
+
+
+
               <Button
                 colorScheme="teal"
                 mt={4}
@@ -151,7 +175,7 @@ function Movies() {
           </Card>
         ))}
       </Stack>
-      
+
     </Box>
   );
 }

@@ -73,7 +73,7 @@ function SignUp() {
           </p>
         </Box>
 
-        <Button onClick={handleSubmit} bg={"violet"} margin={"20px"} name="submit">
+        <Button onClick={handleSubmit} bg={"teal"} color={"white"} margin={"20px"} name="submit">
           Register
         </Button>
       </FormControl>

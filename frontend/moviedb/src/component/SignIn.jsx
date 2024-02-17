@@ -5,6 +5,7 @@ import { signin } from "../redux/auth/action";
 import { useState , } from "react";
 import { useToast } from '@chakra-ui/react'
 import {useNavigate} from 'react-router-dom'
+import Nav from "./Nav";
 function SignIn() {
   const [email, setEmail]= useState("")
   
@@ -24,13 +25,21 @@ function SignIn() {
             title: 'Login Successful',
             description: 'Welcome!!',
             status: 'success',
-            duration: 6000,
+            duration: 3000,
             isClosable: true,
          });
    
         setTimeout(()=>{
           navigate("/movies");
         },1000)
+       }else{
+         toast({
+            title: 'Login Failed',
+            description: 'Please try again',
+            status: 'error',
+            duration: 3000,
+            isClosable: true,
+         });
        }
       
        
@@ -40,18 +49,20 @@ function SignIn() {
           title: 'Login Failed',
           description: 'Please try again',
           status: 'error',
-          duration: 6000,
+          duration: 3000,
           isClosable: true,
        });
     }
  } 
  return (
+  
   <Box width={"md"}
   margin={"auto"}
   backgroundColor={"rgba(255, 255, 255, 0.8)"} 
   borderRadius={"8px"}
   p={8}
   mt={20}>
+    <Nav/>
   <FormControl style={{marginTop:"0px"}}>
     <Heading>Login</Heading>
    <FormLabel>E-mail</FormLabel>
@@ -62,7 +73,7 @@ function SignIn() {
         Didn't have an account, please{" "}
         <Link to="/" style={{color:"blue"}}>sign up here</Link>.
       </p>
-   <Button type="submit" bg={"violet"} margin={"20px"} onClick={handleSubmit} name="submit">Login</Button>
+   <Button type="submit" bg={"teal"} margin={"20px"} color={"white"} onClick={handleSubmit} name="submit">Login</Button>
   </FormControl>
 </Box>
 );
